@@ -1,0 +1,554 @@
+import 'dart:convert';
+import 'dart:html' as html;
+import 'dart:io';
+import 'package:archive/archive_io.dart';
+import 'package:begapp_web/classes/database.dart';
+import 'package:begapp_web/prisoner_dilemma/classes/dilemmaRound.dart';
+import 'package:begapp_web/prisoner_dilemma/classes/dilemma_participant.dart';
+import 'package:begapp_web/public_goods/classes/pgparticipant.dart';
+import 'package:begapp_web/public_goods/classes/roundData.dart';
+import 'package:begapp_web/public_goods/pages/PGParticipants.dart';
+import 'package:intl/intl.dart';
+import 'package:open_file/open_file.dart';
+import 'package:excel/excel.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:path/path.dart';
+import 'participant.dart';
+
+class Excelfile {
+  var excel = Excel.createExcel();
+  late String name;
+  Excelfile();
+
+  format(Duration d) => d.toString().split('.').first.padLeft(8, "0");
+
+//excel com as info dos particpantes dos bens publicos
+  createSheet(List<PgParticipant> participants, String key) {
+    excel.rename('Sheet1', "Participantes");
+    Sheet sheetObject = excel["Participantes"];
+
+    List<String> dataList = [
+      "id",
+      "Idade",
+      "Gênero",
+      "Profissão",
+      "Escolaridade",
+      "Curso",
+      "Total",
+      "Primeiro tutorial",
+      "Tutorial distribuição",
+      "Tutorial Eleição",
+      "Primeiro tutorial",
+      "Tutorial distribuição",
+      "Tutorial Eleição"
+    ];
+
+    sheetObject.insertRowIterables(dataList, 0);
+
+    participants.forEach((element) {
+      List<dynamic> rowList = [];
+
+      rowList.add(element.userId);
+      rowList.add(element.age);
+      rowList.add(element.gender);
+      rowList.add(element.occupation);
+      rowList.add(element.educationLevel);
+      rowList.add(element.cours);
+      rowList.add(format(element.total));
+      rowList.add(format(element.tutorialMain));
+      rowList.add(format(element.tutorialDistribution));
+      rowList.add(format(element.tutorialElection));
+      rowList.add(element.sawMainTutorial);
+      rowList.add(element.sawDistributionTutorial);
+      rowList.add(element.sawElectionTutorial);
+
+      sheetObject.insertRowIterables(
+          rowList, participants.indexOf(element) + 1);
+    });
+    excel.setDefaultSheet("Participantes");
+    name = key;
+    // saveExcel();
+    // List<Excelfile> files = [];
+    // files.add(this);
+    // downloadZip(files, "zipName");
+  }
+
+  createSheetDilemmaParticipants(
+      List<DilemmaParticipant> participants, String key) {
+    excel.rename('Sheet1', "Participantes");
+    Sheet sheetObject = excel["Participantes"];
+
+    List<String> dataList = [
+      "id",
+      "Idade",
+      "Gênero",
+      "Profissão",
+      "Escolaridade",
+      "Curso",
+      "Total",
+      "Tutorial",
+      "Tutorial",
+    ];
+
+    sheetObject.insertRowIterables(dataList, 0);
+
+    participants.forEach((element) {
+      List<dynamic> rowList = [];
+
+      rowList.add(element.userId);
+      rowList.add(element.age);
+      rowList.add(element.gender);
+      rowList.add(element.occupation);
+      rowList.add(element.educationLevel);
+      rowList.add(element.cours);
+      rowList.add(format(element.total));
+      rowList.add(format(element.tutorial));
+      rowList.add(element.sawTutorial);
+
+      sheetObject.insertRowIterables(
+          rowList, participants.indexOf(element) + 1);
+    });
+    excel.setDefaultSheet("Participantes");
+    name = key;
+    // saveExcel();
+  }
+
+//cria a tabela com as info das rodadas dos bens publicos
+  createSheetPgData(
+    List<RoundData> roundsData, {
+    List<PgParticipant>? participantsTutorial,
+    List<Participant>? participantsInfo,
+  }) async {
+    await roundsSheetPg(roundsData);
+
+    PgParticipant p;
+    if (participantsTutorial == null) {
+      List list =
+          await Database.getPgParticipantDataTime(roundsData.first.userId);
+
+      //print(list);
+      p = PgParticipant.fromJson(list[0]);
+      await addTutorialSheetPublicGoods(p);
+    } else {
+      participantsTutorial.forEach((element) {
+        if (element.userId == roundsData.first.userId) p = element;
+      });
+    }
+
+    Participant participant;
+    if (participantsInfo == null) {
+      List list = await Database.getParticipant(roundsData.first.userId);
+      //print(list);
+      participant = Participant.fromJson(list[0]);
+      await addParticipantData(participant);
+    } else {
+      participantsInfo.forEach((element) {
+        if (element.id == roundsData.first.userId) participant = element;
+      });
+    }
+  }
+
+  roundsSheetPg(List<RoundData> roundsData) {
+    excel.rename('Sheet1', roundsData.first.userId.toString());
+    Sheet sheetObject = excel[roundsData.first.userId.toString()];
+    name = roundsData.first.userId.toString();
+
+    List<String> dataList = [
+      "id",
+      "Rodada",
+      "Investimento",
+      "Posição",
+      "Ganho",
+      "Rib",
+      "Distribuição",
+      "Carteira",
+      "Distribuição habilitada",
+      "Suspenso",
+      "Eleições",
+      "Votos",
+      "investir",
+      "Distribuir",
+      "Eleição"
+    ];
+
+    sheetObject.insertRowIterables(dataList, 0);
+
+    roundsData.forEach((r) {
+      List<dynamic> rowList = [];
+      double d = (r.earning / r.rib) * 100;
+      if (r.earning < 0) d = 0.0;
+      var f = new NumberFormat("###.0#", "en_US");
+      String perDist = f.format(d);
+      if (d != 0)
+        perDist = perDist.split('.')[0] + "," + perDist.split('.')[1];
+      else
+        perDist = "0";
+      rowList.add(r.userId);
+      rowList.add(r.round);
+      rowList.add(r.investment);
+      rowList.add(r.positionToken);
+      rowList.add(r.earning);
+      rowList.add(r.rib);
+      rowList.add(r.distribution == 1 ? perDist : "");
+      rowList.add(r.wallet);
+      rowList.add(r.distribution);
+      rowList.add(r.suspended);
+      rowList.add(r.electionCount);
+      rowList.add(r.votes);
+      rowList.add(format(r.dragToken));
+      rowList.add(format(r.distributionTime));
+      rowList.add(format(r.electionTime));
+
+      sheetObject.insertRowIterables(rowList, roundsData.indexOf(r) + 1);
+
+      var cell = sheetObject.cell(CellIndex.indexByString(
+          "I" + (roundsData.indexOf(r) + 2).toString()));
+      CellStyle cellStyle = r.distribution == 1
+          ? CellStyle(
+              backgroundColorHex: "#1AFF1A",
+              fontFamily: getFontFamily(FontFamily.Calibri))
+          : CellStyle();
+      // excel.updateCell(sheetObject.sheetName, CellIndex.indexByColumnRow(columnIndex: cell.colIndex,rowIndex: cell.rowIndex), cell.value, cellStyle: cellStyle);
+      excel.updateCell(
+          sheetObject.sheetName,
+          CellIndex.indexByColumnRow(
+              columnIndex: cell.colIndex, rowIndex: cell.rowIndex),
+          "",
+          cellStyle: cellStyle);
+
+      cell = sheetObject.cell(CellIndex.indexByString(
+          "J" + (roundsData.indexOf(r) + 2).toString()));
+      cellStyle = r.suspended == 1
+          ? CellStyle(
+              backgroundColorHex: "#FF0000",
+              fontFamily: getFontFamily(FontFamily.Calibri))
+          : CellStyle();
+      excel.updateCell(
+          sheetObject.sheetName,
+          CellIndex.indexByColumnRow(
+              columnIndex: cell.colIndex, rowIndex: cell.rowIndex),
+          "",
+          cellStyle: cellStyle);
+    });
+    excel.setDefaultSheet(sheetObject.sheetName);
+  }
+
+  createSheetDilemmaData(List<DilemmaRound> roundsData,
+      {List<DilemmaParticipant>? participantsTutorial,
+      List<Participant>? participantsInfo}) async {
+    await roundsSheetDilemma(roundsData);
+
+    DilemmaParticipant? p;
+    if (participantsTutorial == null) {
+      List list =
+          await Database.getDilemmaParticipantDataTime(roundsData.first.userId);
+      //print(list);
+      p = DilemmaParticipant.fromJson(list[0]);
+    } else {
+      participantsTutorial.forEach((element) {
+        if (element.userId == roundsData.first.userId) p = element;
+      });
+    }
+    if (p != null) await addDilemmaTutorialSheet(p!);
+
+    Participant? participant;
+    if (participantsInfo == null) {
+      List list = await Database.getParticipant(roundsData.first.userId);
+      //print(list);
+      participant = Participant.fromJson(list[0]);
+    } else {
+      participantsInfo.forEach((element) {
+        if (element.id == roundsData.first.userId) participant = element;
+      });
+    }
+    if (participant != null) await addParticipantData(participant!);
+    name = roundsData.first.userId.toString();
+    //saveExcel();
+  }
+
+//cria a tabela com as info das rodadas do Dilema
+  roundsSheetDilemma(List<DilemmaRound> roundsData) {
+    excel.rename('Sheet1', roundsData.first.userId.toString());
+    Sheet sheetObject = excel[roundsData.first.userId.toString()];
+
+    List<String> dataList = [
+      "id",
+      "Rodada",
+      "Computador",
+      "Escolha",
+      "Pontos do Outro",
+      "Seus Pontos",
+      "Perdeu a vez",
+      "Viu pontos do outro",
+      "Viu seus Pontos",
+      "Arrasta a carta"
+    ];
+
+    sheetObject.insertRowIterables(dataList, 0);
+
+    roundsData.forEach((r) {
+      List<dynamic> rowList = [];
+
+      var f = new NumberFormat("###.0#", "en_US");
+      rowList.add(r.userId);
+      rowList.add(r.round);
+      rowList.add(r.computer);
+      rowList.add(r.userChoice);
+      rowList.add(r.otherPoints);
+      rowList.add(r.userPoints);
+      rowList.add(r.lostRound);
+      rowList.add(r.sawOtherPoints);
+      rowList.add(r.sawYourPoints);
+      rowList.add(format(r.dragCard));
+
+      sheetObject.insertRowIterables(rowList, roundsData.indexOf(r) + 1);
+
+      var cell;
+      CellStyle cellStyle;
+
+      cell = sheetObject.cell(CellIndex.indexByString(
+          "G" + (roundsData.indexOf(r) + 2).toString()));
+      cellStyle = r.lostRound == 1
+          ? CellStyle(
+              backgroundColorHex: "#FF0000",
+              fontFamily: getFontFamily(FontFamily.Calibri))
+          : CellStyle();
+      excel.updateCell(
+          sheetObject.sheetName,
+          CellIndex.indexByColumnRow(
+              columnIndex: cell.colIndex, rowIndex: cell.rowIndex),
+          "",
+          cellStyle: cellStyle);
+    });
+    excel.setDefaultSheet(sheetObject.sheetName);
+  }
+
+  addTutorialSheetPublicGoods(PgParticipant p) async {
+    Sheet sheetObject = excel["Tempo"];
+
+    List<String> dataList = [
+      "Experimento",
+      "Total",
+      "Principal",
+      "Distribuição",
+      "Eleição",
+      "Principal",
+      "Distribuição",
+      "Eleição",
+    ];
+
+    sheetObject.insertRowIterables(dataList, 0);
+
+    if (p == null) return; //participante desistiu
+
+    List<dynamic> rowList = [];
+
+    rowList.add(p.experiment);
+    rowList.add(format(p.total));
+    rowList.add(format(p.tutorialMain));
+    rowList.add(format(p.tutorialDistribution));
+    rowList.add(format(p.tutorialElection));
+    rowList.add(p.sawMainTutorial);
+    rowList.add(p.sawDistributionTutorial);
+    rowList.add(p.sawElectionTutorial);
+
+    sheetObject.insertRowIterables(rowList, 1);
+  }
+
+  addDilemmaTutorialSheet(DilemmaParticipant p) async {
+    Sheet sheetObject = excel["Tempo"];
+
+    List<String> dataList = [
+      "Experimento",
+      "Tempo total",
+      "Tempo tutorial",
+      "Viu o tutorial",
+    ];
+
+    sheetObject.insertRowIterables(dataList, 0);
+
+    if (p == null) return;
+
+    List<dynamic> rowList = [];
+
+    rowList.add(p.experiment);
+    rowList.add(format(p.total));
+    rowList.add(format(p.tutorial));
+    rowList.add(p.sawTutorial);
+
+    sheetObject.insertRowIterables(rowList, 1);
+  }
+
+  addParticipantData(Participant participant) async {
+    Sheet sheetObject = excel["Participante"];
+
+    List<String> dataList = [
+      "id",
+      "Idade",
+      "Gênero",
+      "Profissão",
+      "Escolaridade",
+      "Curso",
+    ];
+
+    sheetObject.insertRowIterables(dataList, 0);
+
+    if (participant == null) return;
+
+    List<dynamic> rowList = [];
+
+    rowList.add(participant.id);
+    rowList.add(participant.age);
+    rowList.add(participant.gender);
+    rowList.add(participant.occupation);
+    rowList.add(participant.educationLevel);
+    rowList.add(participant.cours);
+
+    sheetObject.insertRowIterables(rowList, 1);
+  }
+
+  saveExcel() async {
+    // await downloadZip(name);
+
+    final rawData = await excel.encode();
+
+    final content = base64Encode(rawData!);
+    final anchor = html.AnchorElement(
+        href: "data:application/octet-stream;charset=utf-8;base64,$content")
+      ..setAttribute("download", "$name.xlsx")
+      ..click();
+  }
+
+  getPdParticipantsFiles(String key) async {
+    List<Excelfile> files = [];
+    //pega as rodadas dos participantes do experimento
+    List list = await Database.getDilemmaParticipantsData(key);
+    // await Future.delayed(Duration(seconds: 2));
+    List<DilemmaRound> roundsData = [];
+    //print(list);
+    if (list.isEmpty) return files; //exprimento sem participantes
+    for (int i = 0; i < list.length; i++) {
+      roundsData.add(DilemmaRound.fromJson(list[i]));
+    }
+    // pega os participantes com info de escolaridade,profissao, idade...
+    List paticipantsList = await Database.getParticipants(key);
+    List<Participant> participants = [];
+    for (int i = 0; i < paticipantsList.length; i++) {
+      participants.add(Participant.fromJson(paticipantsList[i]));
+    }
+
+    //pega as informações dos tempos
+    list = await Database.getDilemmaParticipants(key);
+    List<DilemmaParticipant> participantsTutorial = [];
+
+    for (int i = 0; i < list.length; i++) {
+      participantsTutorial.add(DilemmaParticipant.fromJson(list[i]));
+    }
+
+    int userId = roundsData.first.userId;
+    int index = 0;
+    for (var i = 0; i < roundsData.length; i++) {
+      if (userId != roundsData[i].userId || roundsData[i] == roundsData.last) {
+        //print("INDEX: $index - I: $i");
+        List<DilemmaRound> rounds = roundsData.sublist(index, i);
+        Excelfile file = new Excelfile();
+        await file.createSheetDilemmaData(rounds,
+            participantsTutorial: participantsTutorial,
+            participantsInfo: participants);
+        //print("NOME: ${file.name}");
+        files.add(file);
+        index = i;
+        userId = roundsData[i].userId;
+      }
+    }
+    return files;
+  }
+
+  getPgParticipantsFiles(String key) async {
+    List<Excelfile> files = [];
+    //pega as rodadas dos participantes do experimento
+    List list = await Database.getPgParticipantsData(key);
+    List<RoundData> roundsData = [];
+    //print(list);
+    if (list.isEmpty) return files; //exprimento sem participantes
+    for (int i = 0; i < list.length; i++) {
+      roundsData.add(RoundData.fromJson(list[i]));
+    }
+    // pega os participantes com info de escolaridade,profissao, idade...
+    List paticipantsList = await Database.getParticipants(key);
+    List<Participant> participants = [];
+    for (int i = 0; i < paticipantsList.length; i++) {
+      participants.add(Participant.fromJson(paticipantsList[i]));
+    }
+
+    //pega as informações dos tempos
+    list = await Database.getPgParticipants(key);
+    List<PgParticipant> participantesTutorial = [];
+
+    for (int i = 0; i < list.length; i++) {
+      participantesTutorial.add(PgParticipant.fromJson(list[i]));
+    }
+
+    int userId = roundsData.first.userId;
+    int index = 0;
+    for (var i = 0; i < roundsData.length; i++) {
+      if (userId != roundsData[i].userId || roundsData[i] == roundsData.last) {
+        //print("INDEX: $index - I: $i");
+        List<RoundData> rounds = roundsData.sublist(index, i);
+        Excelfile file = new Excelfile();
+        await file.createSheetPgData(rounds,
+            participantsTutorial: participantesTutorial,
+            participantsInfo: participants);
+        //print("NOME: ${file.name}");
+        files.add(file);
+        index = i;
+        userId = roundsData[i].userId;
+      }
+    }
+    return files;
+  }
+
+  static downloadZip(List<Excelfile> files, String zipName) async {
+    //objeto do futuro zip
+    Archive zipArchive = new Archive();
+
+    files.forEach((e) async {
+      final rawData = e.excel.encode();
+
+      final content = rawData;
+
+      ArchiveFile excelFile =
+          new ArchiveFile("${e.name}.xlsx", content!.length, content);
+      //adiciona o arquivo excel ao zip
+      zipArchive.addFile(excelFile);
+    });
+
+    List<int> zipInBytes = new ZipEncoder().encode(zipArchive)!;
+    final base64 = base64Encode(zipInBytes);
+
+    final anchor = html.AnchorElement(
+        href: "data:application/octet-stream;charset=utf-8;base64,$base64")
+      ..setAttribute("download", "$zipName.zip")
+      ..click();
+  }
+
+  downloadZipok(String name) async {
+    final rawData = await excel.encode();
+
+    final content = rawData;
+
+    ArchiveFile excelFile =
+        new ArchiveFile("$name.xlsx", content!.length, content);
+
+    Archive zipArchive = new Archive();
+    zipArchive.addFile(excelFile);
+    zipArchive.addFile(excelFile);
+    List<int> zipInBytes = new ZipEncoder().encode(zipArchive)!;
+    final base64 = base64Encode(zipInBytes);
+
+    final anchor = html.AnchorElement(
+        href: "data:application/octet-stream;charset=utf-8;base64,$base64")
+      ..setAttribute("download", "$name.zip")
+      ..click();
+  }
+}
