@@ -65,7 +65,7 @@ dependency_overrides:
   #  intl 0.17.0-nullsafety.2
   #  analyzer: ^0.41.1
   #  meta: 1.6.0
-  platform: ^3.1.0
+  #  platform: ^3.1.0
 
 
 
