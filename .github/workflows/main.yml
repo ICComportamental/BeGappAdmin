@@ -27,6 +27,6 @@ jobs:
         uses: docker/build-push-action@v2.7.0
         with:
           push: true
-          tags: ${{ secrets.REGISTRY_URL }}/begapp/begapp-admin:dev
+          tags: ${{ secrets.REGISTRY_URL }}/begapp-legacy/begapp-admin:dev
           file: begapp_web/Dockerfile
           context: ./begapp_web
