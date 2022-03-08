@@ -29,4 +29,4 @@ jobs:
           push: true
           tags: ${{ secrets.REGISTRY_URL }}/begapp-legacy/begapp-admin:dev
           file: begapp_web/Dockerfile
-          context: ./begapp_web
+          context: ./
