@@ -1,5 +1,5 @@
 # Install Operating system and dependencies
-FROM cirrusci/flutter:latest AS build-env
+FROM cirrusci/flutter:2.10.3 AS build-env
 
 # Run flutter doctor
 RUN flutter doctor
