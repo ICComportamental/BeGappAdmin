@@ -17,7 +17,7 @@ class _SendEmailTesteState extends State<SendEmailTeste> {
     translateEmail(lang);
 
     // String url = "http://localhost/testeEmail/sendEmail.php";
-    String url = "https://ccompjr.com.br/BeGapp/EmailBody.php";
+    String url = "https://v1.begapp.com.br/EmailBody.php";
     // var res = await http.get(
     //   Uri.parse(url),
     // );
@@ -90,7 +90,7 @@ class _SendEmailTesteState extends State<SendEmailTeste> {
                 Database.sendEmail("yasmin.carolina12@gmail.com",
                     "Cadastro BeGapp", emailBody);
                 // "Sua solicitação de cadastro foi aprovada, clique no link para prosseguir com o cadastro: " +
-                //     "<a href='https://ccompjr.com.br/BeGappAdmin/#/RegisterPage'>https://ccompjr.com.br/BeGappAdmin/#/RegisterPage</a>");
+                //     "<a href='https://v1.begapp.com.brAdmin/#/RegisterPage'>https://v1.begapp.com.brAdmin/#/RegisterPage</a>");
               },
             ),
           ],

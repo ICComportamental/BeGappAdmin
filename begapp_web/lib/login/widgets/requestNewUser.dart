@@ -159,7 +159,7 @@ class _RequestNewUserState extends State<RequestNewUser> {
                       child: TextFormField(
                         controller: txtNewUsername,
                         keyboardType: TextInputType.emailAddress,
-                        maxLength: widget.lengths[0].character_maximum_length,
+                        maxLength: widget.lengths[0].CHARACTER_MAXIMUM_LENGTH,
                         decoration: setDecoration(
                             AppLocalizations.of(context).translate('name')),
                         // style: TextStyle(fontSize: 20),
@@ -171,7 +171,7 @@ class _RequestNewUserState extends State<RequestNewUser> {
                         focusNode: focusNode,
                         controller: txtEmail,
                         keyboardType: TextInputType.emailAddress,
-                        maxLength: widget.lengths[1].character_maximum_length,
+                        maxLength: widget.lengths[1].CHARACTER_MAXIMUM_LENGTH,
                         decoration: setDecoration("Email"),
                         // style: TextStyle(fontSize: 20),
                         validator: (value) => validateEmail(value),
@@ -181,7 +181,7 @@ class _RequestNewUserState extends State<RequestNewUser> {
                       child: TextFormField(
                         controller: txtIntention,
                         keyboardType: TextInputType.emailAddress,
-                        maxLength: widget.lengths[2].character_maximum_length,
+                        maxLength: widget.lengths[2].CHARACTER_MAXIMUM_LENGTH,
                         maxLines: 4,
                         decoration: setDecoration(AppLocalizations.of(context)
                             .translate('newUserIntention')),

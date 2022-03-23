@@ -52,7 +52,7 @@ class _TestPageState extends State<TestPage> {
   }
 
   Future makeRequest() async {
-    var url = Uri.parse("https://ccompjr.com.br/BeGapp/upload.php");
+    var url = Uri.parse("https://v1.begapp.com.br/upload.php");
     // var url = Uri.parse("http://localhost/pdf/teste.php");
     // var url = Uri.parse(
     //     "http://192.168.23.10/upload_api/web/app_dev.php/api/save-file/");

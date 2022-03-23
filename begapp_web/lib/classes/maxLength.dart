@@ -6,9 +6,9 @@ part 'maxLength.g.dart';
 class MaxLength {
   @JsonKey(fromJson: MyConverter.stringToInt, toJson: MyConverter.stringFromInt)
   // ignore: non_constant_identifier_names
-  final int character_maximum_length;
+  final int CHARACTER_MAXIMUM_LENGTH;
 
-  MaxLength(this.character_maximum_length);
+  MaxLength(this.CHARACTER_MAXIMUM_LENGTH);
 
   factory MaxLength.fromJson(Map<String, dynamic> json) =>
       _$MaxLengthFromJson(json);

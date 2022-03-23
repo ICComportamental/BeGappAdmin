@@ -51,7 +51,7 @@ class _UploadPdfState extends State<UploadPdf> {
   }
 
   // Future makeRequest() async {
-  //   var url = Uri.parse("https://ccompjr.com.br/BeGapp/upload.php");
+  //   var url = Uri.parse("https://v1.begapp.com.br/upload.php");
   //   // var url = Uri.parse("http://localhost/pdf/teste.php");
 
   //   var request = new http.MultipartRequest("POST", url);

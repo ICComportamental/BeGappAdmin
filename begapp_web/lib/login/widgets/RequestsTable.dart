@@ -155,7 +155,7 @@ class _RequestsTableState extends State<RequestsTable> {
     //                           widget.requests[index].email,
     //                           "Cadastro BeGapp",
     //                           "Sua solicitação de cadastro foi aprovada, clique no link para prosseguir com o cadastro: " +
-    //                               "https://ccompjr.com.br/BeGappAdmin/#/RegisterPage");
+    //                               "https://v1.begapp.com.brAdmin/#/RegisterPage");
     //                       Navigator.pushReplacementNamed(
     //                           context, RequestsPage.routeName);
     //                     },

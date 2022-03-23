@@ -15,7 +15,7 @@ import 'package:http_parser/http_parser.dart';
 
 class Database {
   static getEmailBody(String message, String btnText) async {
-    String url = "https://ccompjr.com.br/BeGapp/EmailBody.php";
+    String url = "https://v1.begapp.com.br/EmailBody.php";
 
     var res = await http.post(Uri.parse(url), headers: {
       "Accept": "application/json"
@@ -29,7 +29,7 @@ class Database {
 
   static sendEmail(String email, String subject, String message) async {
     // String url = "http://localhost/sendEmail/index.php";
-    String url = "https://ccompjr.com.br/BeGapp/sendEmail/index.php";
+    String url = "https://v1.begapp.com.br/sendEmail/index.php";
     String from = "begapp@ccompjr.com.br";
     String to = email;
     String password = "GFVr%9QqduT}";
@@ -114,25 +114,25 @@ class Database {
 
     MaxLength maxLength = MaxLength.fromJson(json[0]);
     //print("$column: ${maxLength.character_maximum_length}");
-    return maxLength.character_maximum_length;
+    return maxLength.CHARACTER_MAXIMUM_LENGTH;
   }
 
   static select(String query) async {
-    String url = "https://ccompjr.com.br/BeGapp/select.php";
+    String url = "https://v1.begapp.com.br/select.php";
     var res = await http.post(Uri.parse(url),
         headers: {"Accept": "application/json"}, body: {"query": query});
     return res.body;
   }
 
   static update(String query) async {
-    String url = "https://ccompjr.com.br/BeGapp/select.php";
+    String url = "https://v1.begapp.com.br/select.php";
     var res = await http.post(Uri.parse(url),
         headers: {"Accept": "application/json"}, body: {"query": query});
     return res.body;
   }
 
   static insert(String query) async {
-    String url = "https://ccompjr.com.br/BeGapp/insert.php";
+    String url = "https://v1.begapp.com.br/insert.php";
     var res = await http.post(Uri.parse(url),
         headers: {"Accept": "application/json"}, body: {"query": query});
     return res.body;
@@ -316,7 +316,7 @@ class Database {
         "' WHERE `config_publicgoods`.`id`=" +
         config.id.toString() +
         ";";
-    String url = "https://ccompjr.com.br/BeGapp/select.php";
+    String url = "https://v1.begapp.com.br/select.php";
     //var res =
     await http.post(Uri.parse(url),
         headers: {"Accept": "application/json"}, body: {"query": query});
@@ -372,7 +372,7 @@ class Database {
             '${message.message}','${variables.key}',${message.round},${message.level},${message.criterion});
           """;
 
-    String url = "https://ccompjr.com.br/BeGapp/insert.php";
+    String url = "https://v1.begapp.com.br/insert.php";
     await http.post(Uri.parse(url),
         headers: {"Accept": "application/json"}, body: {"query": query});
     print(query);
@@ -400,7 +400,7 @@ class Database {
         " UPDATE `popup_message_pg` SET `round`=${variables.maxTrys} WHERE `experiment`='${variables.key}' AND `criterion`=true;";
 
     print(query);
-    String url = "https://ccompjr.com.br/BeGapp/select.php";
+    String url = "https://v1.begapp.com.br/select.php";
     await http.post(Uri.parse(url),
         headers: {"Accept": "application/json"}, body: {"query": query});
 
@@ -452,7 +452,7 @@ class Database {
             '${message.message}','${variables.key}',${message.round});
           """;
 
-    String url = "https://ccompjr.com.br/BeGapp/insert.php";
+    String url = "https://v1.begapp.com.br/insert.php";
     await http.post(Uri.parse(url),
         headers: {"Accept": "application/json"}, body: {"query": query});
     print(query);
@@ -478,7 +478,7 @@ class Database {
         variables.id.toString() +
         ";";
 
-    String url = "https://ccompjr.com.br/BeGapp/select.php";
+    String url = "https://v1.begapp.com.br/select.php";
     await http.post(Uri.parse(url),
         headers: {"Accept": "application/json"}, body: {"query": query});
     return variables.key;
@@ -531,7 +531,7 @@ class Database {
   }
 
   static Future makeRequest(List<int> _selectedFile, String fileName) async {
-    var url = Uri.parse("https://ccompjr.com.br/BeGapp/upload.php");
+    var url = Uri.parse("https://v1.begapp.com.br/upload.php");
     // var url = Uri.parse("http://localhost/pdf/teste.php");
 
     var request = new http.MultipartRequest("POST", url);
