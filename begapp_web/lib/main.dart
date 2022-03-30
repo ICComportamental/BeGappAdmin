@@ -78,7 +78,7 @@ class MyApp extends StatelessWidget {
         child: Consumer<AppLanguage>(builder: (context, model, child) {
           appLanguage.changeLanguage(Locale("en"));
           return MaterialApp(
-            initialRoute: RegisterPage.routeName,
+            initialRoute: "/login",
             routes: {
               // When navigating to the "/" route, build the FirstScreen widget.
               '/login': (context) => LoginPage(),
