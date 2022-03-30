@@ -1,12 +1,11 @@
+// ignore_for_file: avoid_web_libraries_in_flutter
+
 import 'package:begapp_web/app_localizations.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 
 import 'dart:html' as html;
 import 'dart:typed_data';
-import 'dart:async';
 import 'dart:convert';
-import 'package:http_parser/http_parser.dart';
 
 class UploadPdf extends StatefulWidget {
   final Function getSelectedFile;

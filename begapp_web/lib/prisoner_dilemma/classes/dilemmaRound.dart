@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:begapp_web/classes/myconverter.dart';
 part 'dilemmaRound.g.dart';
 
-@JsonSerializable(nullable: false)
+@JsonSerializable()
 class DilemmaRound {
   @JsonKey(fromJson: MyConverter.stringToInt, toJson: MyConverter.stringFromInt)
   final int userId;

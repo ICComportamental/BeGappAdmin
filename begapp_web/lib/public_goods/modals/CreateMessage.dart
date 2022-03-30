@@ -1,10 +1,10 @@
 import 'package:begapp_web/app_localizations.dart';
 import 'package:begapp_web/classes/popup_message_pg.dart';
 import 'package:begapp_web/forms/DropDownField.dart';
-import 'package:begapp_web/public_goods/classes/PG_variables.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+// ignore: must_be_immutable
 class CreateMessage extends StatefulWidget {
   final int maxTrys;
   Function setPopUpMessage;

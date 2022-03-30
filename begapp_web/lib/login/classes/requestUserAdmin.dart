@@ -2,7 +2,7 @@ import 'package:begapp_web/classes/myconverter.dart';
 import 'package:json_annotation/json_annotation.dart';
 part 'requestUserAdmin.g.dart';
 
-@JsonSerializable(nullable: false)
+@JsonSerializable()
 class AdminUserRequest {
   @JsonKey(fromJson: MyConverter.stringToInt, toJson: MyConverter.stringFromInt)
   int id;

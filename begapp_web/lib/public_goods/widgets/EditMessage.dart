@@ -6,7 +6,6 @@ import 'package:begapp_web/public_goods/classes/PG_variables.dart';
 import 'package:begapp_web/public_goods/modals/EditMessage.modal.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:universal_html/html.dart';
 
 class EditMessage extends StatefulWidget {
   final PublicGoodsVariables variables;
@@ -37,7 +36,6 @@ class _EditMessageState extends State<EditMessage> {
   late PopUpMessagePublicGoods message;
   @override
   void initState() {
-    // TODO: implement initState
     message = widget.popUpMessage;
     txtMessage.text = message.message;
     txtRound.text = message.round.toString();

@@ -2,7 +2,7 @@ import 'package:begapp_web/classes/myconverter.dart';
 import 'package:json_annotation/json_annotation.dart';
 part 'pgparticipant.g.dart';
 
-@JsonSerializable(nullable: false)
+@JsonSerializable()
 class PgParticipant {
   @JsonKey(fromJson: MyConverter.stringToInt, toJson: MyConverter.stringFromInt)
   final int userId;

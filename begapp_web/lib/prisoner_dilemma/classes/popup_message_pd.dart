@@ -2,7 +2,7 @@ import 'package:begapp_web/classes/myconverter.dart';
 import 'package:json_annotation/json_annotation.dart';
 part 'popup_message_pd.g.dart';
 
-@JsonSerializable(nullable: false)
+@JsonSerializable()
 class PopUpMessagePrisonersDilemma {
   @JsonKey(fromJson: MyConverter.stringToInt, toJson: MyConverter.stringFromInt)
   final int id;

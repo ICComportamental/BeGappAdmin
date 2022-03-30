@@ -1,7 +1,6 @@
 import 'package:begapp_web/DatatableElements/classes/search.dart';
 import 'package:begapp_web/app_localizations.dart';
 import 'package:begapp_web/forms/DropDownField.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class SearchField extends StatefulWidget {
@@ -23,7 +22,6 @@ class _SearchFieldState extends State<SearchField> {
   bool showArchive = false;
   @override
   void initState() {
-    // TODO: implement initState
     value = widget.search.filters[0];
     super.initState();
   }

@@ -5,7 +5,6 @@ import 'package:begapp_web/classes/excel.dart';
 import 'package:begapp_web/main.dart';
 import 'package:begapp_web/prisoner_dilemma/classes/dilemmaVariables.dart';
 import 'package:begapp_web/prisoner_dilemma/classes/dilemma_participant.dart';
-import 'package:begapp_web/prisoner_dilemma/pages/DilemmaExperimentsTable.page.dart';
 import 'package:begapp_web/prisoner_dilemma/pages/DilemmaParticipants.page.dart';
 import 'package:flutter/material.dart';
 

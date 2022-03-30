@@ -127,7 +127,6 @@ class _RegisterPageState extends State<RegisterPage> {
   late FocusNode focusNodeUsername;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     focusNode = new FocusNode();
     focusNode.addListener(() {

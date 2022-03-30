@@ -4,6 +4,7 @@ import 'package:begapp_web/login/classes/requestUserAdmin.dart';
 import 'package:begapp_web/login/pages/RequestsPage.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class RequestDetails extends StatelessWidget {
   AdminUserRequest request;
   RequestDetails(this.request);

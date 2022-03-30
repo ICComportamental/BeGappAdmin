@@ -6,7 +6,6 @@ import 'package:begapp_web/main.dart';
 import 'package:begapp_web/public_goods/classes/PG_variables.dart';
 import 'package:begapp_web/public_goods/classes/pgparticipant.dart';
 import 'package:begapp_web/public_goods/pages/PGParticipants.dart';
-import 'package:begapp_web/public_goods/pages/PublicGoodsExperiments.page.dart';
 import 'package:flutter/material.dart';
 
 List<DataCell> getPGExperiment(

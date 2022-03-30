@@ -3,17 +3,12 @@ import 'package:begapp_web/DatatableElements/classes/search.dart';
 import 'package:begapp_web/DatatableElements/pagedTable.dart';
 import 'package:begapp_web/app_localizations.dart';
 import 'package:begapp_web/classes/database.dart';
-import 'package:begapp_web/classes/dialogs.dart';
 import 'package:begapp_web/prisoner_dilemma/classes/dilemmaVariables.dart';
-import 'package:begapp_web/prisoner_dilemma/pages/DilemmaParticipants.page.dart';
-import 'package:begapp_web/widgets/app_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 // import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:intl/intl.dart';
 
-import '../../main.dart';
-
+// ignore: must_be_immutable
 class DilemmaExperimentsTable extends StatefulWidget {
   List<DilemmaVariables> experiments;
 
@@ -52,8 +47,6 @@ class _DilemmaExperimentsTableState extends State<DilemmaExperimentsTable> {
   }
 
   TextEditingController txtSearch = new TextEditingController();
-
-  TextStyle _headerTextStyle = TextStyle(color: Colors.white, fontSize: 20);
 
   void next() {}
 

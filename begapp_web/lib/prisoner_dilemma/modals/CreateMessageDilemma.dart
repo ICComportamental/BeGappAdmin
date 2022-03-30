@@ -1,9 +1,9 @@
 import 'package:begapp_web/app_localizations.dart';
-import 'package:begapp_web/forms/DropDownField.dart';
 import 'package:begapp_web/prisoner_dilemma/classes/popup_message_pd.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+// ignore: must_be_immutable
 class CreateMessageDilemma extends StatefulWidget {
   final int maxTrys;
   Function setPopUpMessage;

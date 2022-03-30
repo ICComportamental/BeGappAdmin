@@ -3,9 +3,9 @@ import 'package:begapp_web/DatatableElements/pagedTable.dart';
 import 'package:begapp_web/app_localizations.dart';
 import 'package:begapp_web/public_goods/classes/pgparticipant.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 // import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
+// ignore: must_be_immutable
 class PGParticipantsTable extends StatefulWidget {
   List experiments;
   PGParticipantsTable(this.experiments);

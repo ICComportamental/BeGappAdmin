@@ -1,6 +1,5 @@
 import 'package:begapp_web/app_localizations.dart';
 import 'package:begapp_web/DatatableElements/TableRows/datatableRows.dart';
-import 'package:begapp_web/login/classes/requestUserAdmin.dart';
 import 'package:begapp_web/widgets/customDatatable.dart';
 import 'package:flutter/material.dart';
 

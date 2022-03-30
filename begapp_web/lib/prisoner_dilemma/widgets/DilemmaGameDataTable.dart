@@ -2,10 +2,9 @@ import 'package:begapp_web/app_localizations.dart';
 import 'package:begapp_web/prisoner_dilemma/classes/dilemmaRound.dart';
 import 'package:begapp_web/widgets/customDatatable.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 // import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
-import 'package:intl/intl.dart';
 
+// ignore: must_be_immutable
 class DilemmaGameDataTable extends StatefulWidget {
   List roundsData;
   DilemmaGameDataTable(this.roundsData);
@@ -126,7 +125,6 @@ class _DilemmaGameDataTableState extends State<DilemmaGameDataTable> {
                     ],
                     rows: rounds.map(
                       (round) {
-                        var f = new NumberFormat("###.0#", "en_US");
                         return DataRow(cells: [
                           DataCell(cellText(round.round.toString())),
                           DataCell(cellText(round.computer.toString())),

@@ -8,7 +8,6 @@ import 'package:begapp_web/main.dart';
 import 'package:begapp_web/prisoner_dilemma/classes/dilemmaVariables.dart';
 import 'package:begapp_web/prisoner_dilemma/classes/popup_message_pd.dart';
 import 'package:begapp_web/prisoner_dilemma/modals/EditDilemmaVariables.dart';
-import 'package:begapp_web/prisoner_dilemma/modals/EditMessageDilemma.modal.dart';
 import 'package:begapp_web/prisoner_dilemma/modals/createDilemmaExperiment.dart';
 import 'package:begapp_web/prisoner_dilemma/widgets/EditMessageDilemma.dart';
 import 'package:begapp_web/public_goods/classes/PG_variables.dart';
@@ -41,8 +40,10 @@ class Dialogs {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: <Widget>[
-                  RaisedButton(
-                    color: Colors.blue,
+                  TextButton(
+                    style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all<Color>(Colors.blue)),
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
@@ -54,8 +55,10 @@ class Dialogs {
                   SizedBox(
                     width: 20,
                   ),
-                  RaisedButton(
-                    color: Colors.red,
+                  TextButton(
+                    style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all<Color>(Colors.red)),
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
@@ -195,7 +198,6 @@ class Dialogs {
   }
 
   static showRequests(BuildContext context) async {
-    double side = MediaQuery.of(context).size.longestSide * 0.2;
     Dialog simpleDialog = Dialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12.0),
@@ -238,8 +240,10 @@ class Dialogs {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: <Widget>[
-                  RaisedButton(
-                    color: Colors.blue,
+                  TextButton(
+                    style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all<Color>(Colors.blue)),
                     onPressed: () async {
                       Navigator.of(context).pop();
                       switch (variableName) {
@@ -265,8 +269,10 @@ class Dialogs {
                   SizedBox(
                     width: 20,
                   ),
-                  RaisedButton(
-                    color: Colors.red,
+                  TextButton(
+                    style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all<Color>(Colors.red)),
                     onPressed: () {
                       Navigator.of(context).pop();
                     },

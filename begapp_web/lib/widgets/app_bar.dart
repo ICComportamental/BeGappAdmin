@@ -1,11 +1,8 @@
 import 'package:begapp_web/app_localizations.dart';
-import 'package:begapp_web/classes/dialogs.dart';
 import 'package:begapp_web/login/pages/RequestsPage.dart';
 import 'package:begapp_web/login/loginSettings.dart';
 import 'package:begapp_web/main.dart';
-import 'package:begapp_web/pages/home.page.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'menu_item.dart';
 
 class CustomAppBar extends StatefulWidget {

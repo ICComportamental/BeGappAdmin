@@ -3,10 +3,10 @@ import 'dart:convert';
 import 'package:begapp_web/app_localizations.dart';
 import 'package:begapp_web/classes/database.dart';
 import 'package:begapp_web/classes/dialogs.dart';
-import 'package:begapp_web/login/pages/login.page.dart';
 import 'package:crypto/crypto.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class ResetPasswordPage extends StatefulWidget {
   String email;
   ResetPasswordPage(this.email);

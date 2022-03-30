@@ -2,7 +2,7 @@ import 'package:begapp_web/classes/myconverter.dart';
 import 'package:json_annotation/json_annotation.dart';
 part 'dilemmaVariables.g.dart';
 
-@JsonSerializable(nullable: false)
+@JsonSerializable()
 class DilemmaVariables {
   late String adminId; //id do admin criador do experimento
   @JsonKey(

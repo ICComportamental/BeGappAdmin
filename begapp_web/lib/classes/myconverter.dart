@@ -36,16 +36,12 @@ class MyConverter {
     switch (rule) {
       case "intermittent election disabled":
         return 1;
-        break;
       case "intermittent election enabled":
         return 2;
-        break;
       case "recurring election disabled":
         return 3;
-        break;
       case "recurring election enabled":
         return 4;
-        break;
       default:
         return 0;
     }

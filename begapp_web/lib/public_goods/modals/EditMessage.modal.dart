@@ -2,8 +2,6 @@ import 'package:begapp_web/classes/database.dart';
 import 'package:begapp_web/classes/popup_message_pg.dart';
 import 'package:begapp_web/public_goods/classes/PG_variables.dart';
 import 'package:begapp_web/public_goods/widgets/popUpMessagesTable.dart';
-import 'package:begapp_web/widgets/app_bar.dart';
-import 'package:begapp_web/widgets/futureCheckLogin.dart';
 import 'package:flutter/material.dart';
 
 class EditMessageModal extends StatefulWidget {

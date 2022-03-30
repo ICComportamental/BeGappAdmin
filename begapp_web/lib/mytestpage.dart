@@ -1,14 +1,5 @@
-// import 'dart:html';
+// ignore_for_file: avoid_web_libraries_in_flutter, await_only_futures, unused_local_variable
 
-// import 'dart:io';
-// import 'dart:typed_data';
-
-// import 'package:begapp_web/chartTest.dart';
-// import 'package:begapp_web/prisoner_dilemma/widgets/graphic.dart';
-// import 'package:begapp_web/widgets/hover/translate_on_hover.dart';
-// import 'package:file_picker/file_picker.dart';
-// import 'package:fl_chart/fl_chart.dart';
-import 'package:begapp_web/main.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -18,7 +9,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:http_parser/http_parser.dart';
 
-import 'classes/database.dart';
+// import 'classes/database.dart';
 
 class TestPage extends StatefulWidget {
   @override
@@ -77,16 +68,16 @@ class _TestPageState extends State<TestPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: TextButton(
-          child: Text("Teste email"),
-          onPressed: () async {
-            await Database.sendgrid("email", "subject", "message");
-          },
-        ),
-      ),
-    );
+    // return Scaffold(
+    //   body: Center(
+    //     child: TextButton(
+    //       child: Text("Teste email"),
+    //       onPressed: () async {
+    //         await Database.sendgrid("email", "subject", "message");
+    //       },
+    //     ),
+    //   ),
+    // );
     return Scaffold(
         body: Container(
           width: MediaQuery.of(context).size.width,

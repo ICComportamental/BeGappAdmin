@@ -1,9 +1,7 @@
-import 'package:begapp_web/AppLanguage.dart';
 import 'package:begapp_web/app_localizations.dart';
 import 'package:begapp_web/classes/database.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:provider/provider.dart';
 
 class SendEmailTeste extends StatefulWidget {
   @override
@@ -54,7 +52,6 @@ class _SendEmailTesteState extends State<SendEmailTeste> {
   @override
   Widget build(BuildContext context) {
     // print("TOP:" + appLanguage.appLocal.toString());
-    var appLanguage = Provider.of<AppLanguage>(context);
 
     return Scaffold(
       body: Center(

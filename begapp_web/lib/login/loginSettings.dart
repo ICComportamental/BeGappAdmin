@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_null_comparison
+
 import 'package:begapp_web/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

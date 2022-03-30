@@ -1,24 +1,13 @@
-import 'dart:convert';
-import 'dart:typed_data';
-
 import 'package:begapp_web/app_localizations.dart';
 import 'package:begapp_web/classes/database.dart';
-import 'package:begapp_web/classes/dialogs.dart';
 import 'package:begapp_web/classes/popup_message_pg.dart';
 import 'package:begapp_web/forms/DropDownField.dart';
-import 'package:begapp_web/main.dart';
 import 'package:begapp_web/public_goods/classes/PG_variables.dart';
 import 'package:begapp_web/public_goods/modals/CreateMessage.dart';
-import 'package:begapp_web/widgets/futureCheckLogin.dart';
 import 'package:begapp_web/widgets/uploadPdf.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
-
-import 'package:http/http.dart' as http;
-import 'package:http_parser/http_parser.dart';
-
-import 'dart:html' as html;
 
 class CreatePGExperiment extends StatefulWidget {
   static const routeName = '/Public_Goods_Create_Experiment';

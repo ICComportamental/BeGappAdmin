@@ -1,20 +1,11 @@
 import 'package:begapp_web/DatatableElements/Datatable.dart';
 import 'package:begapp_web/DatatableElements/pagedTable.dart';
 import 'package:begapp_web/app_localizations.dart';
-import 'package:begapp_web/classes/database.dart';
-import 'package:begapp_web/classes/excel.dart';
-import 'package:begapp_web/prisoner_dilemma/classes/dilemmaRound.dart';
-import 'package:begapp_web/prisoner_dilemma/classes/dilemmaVariables.dart';
 import 'package:begapp_web/prisoner_dilemma/classes/dilemma_participant.dart';
-import 'package:begapp_web/prisoner_dilemma/modals/gameDataDilemma.dart';
-import 'package:begapp_web/widgets/app_bar.dart';
-import 'package:begapp_web/widgets/customDatatable.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
-import 'DilemmaGameDataTable.dart';
-
+// ignore: must_be_immutable
 class DilemmaParticipantsTable extends StatefulWidget {
   List participants;
   DilemmaParticipantsTable(this.participants);

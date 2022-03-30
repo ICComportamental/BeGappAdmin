@@ -1,13 +1,10 @@
 import 'package:begapp_web/app_localizations.dart';
 import 'package:begapp_web/classes/database.dart';
 import 'package:begapp_web/forms/DropDownField.dart';
-import 'package:begapp_web/main.dart';
 import 'package:begapp_web/prisoner_dilemma/classes/dilemmaVariables.dart';
 import 'package:begapp_web/prisoner_dilemma/classes/popup_message_pd.dart';
 import 'package:begapp_web/prisoner_dilemma/modals/CreateMessageDilemma.dart';
 import 'package:begapp_web/prisoner_dilemma/widgets/dilemaMatrix.dart';
-import 'package:begapp_web/public_goods/classes/PG_variables.dart';
-import 'package:begapp_web/widgets/futureCheckLogin.dart';
 import 'package:begapp_web/widgets/uploadPdf.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

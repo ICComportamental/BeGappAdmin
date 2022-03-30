@@ -1,8 +1,9 @@
+// ignore_for_file: unnecessary_null_comparison
+
 import 'package:begapp_web/DatatableElements/btnPagedTable.dart';
 import 'package:begapp_web/DatatableElements/classes/search.dart';
 import 'package:begapp_web/DatatableElements/searchField.dart';
 import 'package:begapp_web/app_localizations.dart';
-import 'package:begapp_web/forms/DropDownField.dart';
 import 'package:begapp_web/widgets/app_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -36,9 +37,6 @@ class _PagedTableState extends State<PagedTable> {
         height: MediaQuery.of(context).size.height * 0.05,
       );
     }
-
-    List<String> items = ["aaa", "bbb"];
-    String value = "aaa";
 
     return Scrollbar(
         isAlwaysShown: true,

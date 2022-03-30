@@ -5,6 +5,7 @@ import 'package:begapp_web/classes/database.dart';
 import 'package:begapp_web/login/pages/resetPassword.page.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class ForgotPasswordCodePage extends StatelessWidget {
   final TextEditingController txtCode = new TextEditingController();
 

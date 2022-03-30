@@ -1,14 +1,10 @@
 import 'package:begapp_web/DatatableElements/Datatable.dart';
-import 'package:begapp_web/DatatableElements/btnPagedTable.dart';
 import 'package:begapp_web/DatatableElements/classes/search.dart';
 import 'package:begapp_web/DatatableElements/pagedTable.dart';
 import 'package:begapp_web/app_localizations.dart';
 import 'package:begapp_web/classes/database.dart';
 import 'package:begapp_web/login/classes/requestUserAdmin.dart';
-import 'package:begapp_web/widgets/app_bar.dart';
 import 'package:flutter/material.dart';
-
-import '../pages/RequestsPage.dart';
 
 class RequestsTable extends StatefulWidget {
   final List<AdminUserRequest> requests;
@@ -34,14 +30,6 @@ class _RequestsTableState extends State<RequestsTable> {
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
-    space() {
-      return SizedBox(
-        height: MediaQuery.of(context).size.height * 0.05,
-      );
-    }
-
     return PagedTable(
       search: new Search([
         AppLocalizations.of(context).translate('name'),

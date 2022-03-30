@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_null_comparison
+
 import 'dart:math' as math;
 
 import 'package:begapp_web/widgets/hover/translate_on_hover.dart';
@@ -69,8 +71,7 @@ class CircularMenu extends StatefulWidget {
     this.key,
     required this.startingAngleInRadian,
     required this.endingAngleInRadian,
-  })  : assert(items != null, 'items can not be empty list'),
-        assert(items.length > 1, 'if you have one item no need to use a Menu'),
+  })  : assert(items.length > 1, 'if you have one item no need to use a Menu'),
         super(key: key);
 
   @override

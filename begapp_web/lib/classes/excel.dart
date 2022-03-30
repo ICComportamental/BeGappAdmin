@@ -1,18 +1,16 @@
+// ignore_for_file: unnecessary_null_comparison, await_only_futures, unused_local_variable
+
 import 'dart:convert';
+// ignore: avoid_web_libraries_in_flutter
 import 'dart:html' as html;
-import 'dart:io';
 import 'package:archive/archive_io.dart';
 import 'package:begapp_web/classes/database.dart';
 import 'package:begapp_web/prisoner_dilemma/classes/dilemmaRound.dart';
 import 'package:begapp_web/prisoner_dilemma/classes/dilemma_participant.dart';
 import 'package:begapp_web/public_goods/classes/pgparticipant.dart';
 import 'package:begapp_web/public_goods/classes/roundData.dart';
-import 'package:begapp_web/public_goods/pages/PGParticipants.dart';
 import 'package:intl/intl.dart';
-import 'package:open_file/open_file.dart';
 import 'package:excel/excel.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:path/path.dart';
 import 'participant.dart';
 
 class Excelfile {
@@ -289,7 +287,7 @@ class Excelfile {
     roundsData.forEach((r) {
       List<dynamic> rowList = [];
 
-      var f = new NumberFormat("###.0#", "en_US");
+      // var f = new NumberFormat("###.0#", "en_US");
       rowList.add(r.userId);
       rowList.add(r.round);
       rowList.add(r.computer);

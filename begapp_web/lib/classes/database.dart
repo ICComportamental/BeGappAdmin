@@ -554,7 +554,7 @@ class Database {
 
     var request = new http.MultipartRequest("POST", url);
 
-    var file = await http.MultipartFile.fromBytes('file', _selectedFile,
+    var file = http.MultipartFile.fromBytes('file', _selectedFile,
         contentType: new MediaType('application', 'octet-stream'),
         filename: fileName);
 

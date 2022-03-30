@@ -1,8 +1,5 @@
-import 'dart:math';
-
 import 'package:begapp_web/app_localizations.dart';
 import 'package:begapp_web/public_goods/classes/pgparticipant.dart';
-import 'package:begapp_web/widgets/customDatatable.dart';
 
 import 'package:flutter/material.dart';
 

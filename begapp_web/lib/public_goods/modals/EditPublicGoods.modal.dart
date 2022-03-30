@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:begapp_web/app_localizations.dart';
 import 'package:begapp_web/classes/database.dart';
 import 'package:begapp_web/classes/popup_message_pg.dart';
@@ -10,8 +8,6 @@ import 'package:begapp_web/widgets/uploadPdf.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
-
-import 'CreateMessage.dart';
 
 class EditPublicGoodsVariables extends StatefulWidget {
   final PublicGoodsVariables variables;

@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:ui';
 
 import 'package:begapp_web/app_localizations.dart';
 import 'package:begapp_web/classes/database.dart';
@@ -72,7 +71,6 @@ class _RequestNewUserState extends State<RequestNewUser> {
   late FocusNode focusNode;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     focusNode = new FocusNode();
     focusNode.addListener(() {
