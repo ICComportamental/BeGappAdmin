@@ -27,20 +27,38 @@ class Database {
     return emailBody;
   }
 
-  static sendEmail(String email, String subject, String message) async {
+  // static sendEmail(String email, String subject, String message) async {
+  //   // String url = "http://localhost/sendEmail/index.php";
+  //   String url = "https://v1.begapp.com.br/sendEmail/index.php";
+  //   String from = "begapp@ccompjr.com.br";
+  //   String to = email;
+  //   String password = "GFVr%9QqduT}";
+
+  //   String body = message;
+
+  //   var res = await http.post(Uri.parse(url), headers: {
+  //     "Accept": "application/json"
+  //   }, body: {
+  //     "emailFrom": from,
+  //     "emailPassword": password,
+  //     "emailTo": to,
+  //     "emailSubject": subject,
+  //     "emailBody": body,
+  //   });
+  //   // //print(res.body);
+  //   return res.body;
+  // }
+
+  static sendgrid(String email, String subject, String message) async {
     // String url = "http://localhost/sendEmail/index.php";
-    String url = "https://v1.begapp.com.br/sendEmail/index.php";
-    String from = "begapp@ccompjr.com.br";
+    String url = "https://v1.begapp.com.br/sendgrid/index.php";
     String to = email;
-    String password = "GFVr%9QqduT}";
 
     String body = message;
 
     var res = await http.post(Uri.parse(url), headers: {
       "Accept": "application/json"
     }, body: {
-      "emailFrom": from,
-      "emailPassword": password,
       "emailTo": to,
       "emailSubject": subject,
       "emailBody": body,

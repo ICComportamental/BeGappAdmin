@@ -69,7 +69,7 @@ class _SendEmailTesteState extends State<SendEmailTeste> {
                   String emailBody =
                       await Database.getEmailBody(message, btnText);
                   //Envia o email para que o cadastro do novo adm seja concluido
-                  Database.sendEmail(
+                  Database.sendgrid(
                       "yasmin.carolina12@gmail.com", btnText, emailBody);
                   // AppLocalizations.of(context).locale.languageCode;
                   // await select(lang);
@@ -87,7 +87,7 @@ class _SendEmailTesteState extends State<SendEmailTeste> {
               child: Text(AppLocalizations.of(context).translate("send")),
               onPressed: () async {
                 await select("pt");
-                Database.sendEmail("yasmin.carolina12@gmail.com",
+                Database.sendgrid("yasmin.carolina12@gmail.com",
                     "Cadastro BeGapp", emailBody);
                 // "Sua solicitação de cadastro foi aprovada, clique no link para prosseguir com o cadastro: " +
                 //     "<a href='https://v1.begapp.com.brAdmin/#/RegisterPage'>https://v1.begapp.com.brAdmin/#/RegisterPage</a>");

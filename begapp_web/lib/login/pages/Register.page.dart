@@ -5,7 +5,6 @@ import 'package:begapp_web/classes/connection.dart';
 import 'package:begapp_web/classes/database.dart';
 import 'package:begapp_web/login/classes/adminUser.dart';
 import 'package:begapp_web/login/classes/requestUserAdmin.dart';
-import 'package:begapp_web/widgets/futureCheckLogin.dart';
 import 'package:flutter/material.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -96,6 +95,7 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   Future<void> _handleSubmit(BuildContext context) async {
+    print("FUTUREEE");
     try {
       Connection.showLoadingDialog(context, _keyLoader); //invoking login
       // bool con = await Connection.checkConnection(context);
@@ -151,6 +151,7 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
+    double longestSide = MediaQuery.of(context).size.longestSide;
     return Scaffold(
         body: Container(
       color: Colors.blue,
@@ -184,8 +185,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       child: Text(
                         AppLocalizations.of(context).translate('RegisterLabel'),
                         style: TextStyle(
-                            fontSize:
-                                MediaQuery.of(context).size.longestSide * 0.02,
+                            fontSize: longestSide * 0.02,
                             fontWeight: FontWeight.bold),
                       ),
                     )),
@@ -283,7 +283,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         onChanged: (value) => _formKey.currentState!.validate(),
                         decoration: InputDecoration(
                             labelText: AppLocalizations.of(context)
-                                .translate('confirmPassword'),
+                                .translate('ConfirmPassword'),
                             labelStyle: TextStyle(
                               color: Colors.black38,
                               fontWeight: FontWeight.w400,

@@ -18,6 +18,8 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:http_parser/http_parser.dart';
 
+import 'classes/database.dart';
+
 class TestPage extends StatefulWidget {
   @override
   _TestPageState createState() => _TestPageState();
@@ -75,6 +77,16 @@ class _TestPageState extends State<TestPage> {
 
   @override
   Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: TextButton(
+          child: Text("Teste email"),
+          onPressed: () async {
+            await Database.sendgrid("email", "subject", "message");
+          },
+        ),
+      ),
+    );
     return Scaffold(
         body: Container(
           width: MediaQuery.of(context).size.width,

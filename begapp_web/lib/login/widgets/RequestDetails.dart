@@ -105,7 +105,7 @@ class RequestDetails extends StatelessWidget {
                         String emailBody =
                             await Database.getEmailBody(message, btnText);
                         //Envia o email para que o cadastro do novo adm seja concluido
-                        Database.sendEmail(request.email, btnText, emailBody);
+                        Database.sendgrid(request.email, btnText, emailBody);
                         Navigator.pushReplacementNamed(
                             context, RequestsPage.routeName);
                       },

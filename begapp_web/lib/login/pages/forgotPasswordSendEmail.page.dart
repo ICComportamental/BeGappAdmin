@@ -167,7 +167,7 @@ class ForgotPasswordSendEmailPage extends StatelessWidget {
                                       String query =
                                           "UPDATE AdminUser SET code='$code' WHERE email = '${txtEmail.text}'";
                                       await Database.update(query);
-                                      await Database.sendEmail(
+                                      await Database.sendgrid(
                                           txtEmail.text,
                                           AppLocalizations.of(context)
                                               .translate('resetPassword'),
