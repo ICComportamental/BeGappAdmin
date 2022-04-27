@@ -69,7 +69,7 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider<AppLanguage>(
         create: (_) => appLanguage,
         child: Consumer<AppLanguage>(builder: (context, model, child) {
-          appLanguage.changeLanguage(Locale("en"));
+          // appLanguage.changeLanguage(Locale("en"));
           return MaterialApp(
             initialRoute: "/login",
             routes: {

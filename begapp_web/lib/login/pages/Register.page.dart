@@ -30,9 +30,10 @@ class _RegisterPageState extends State<RegisterPage> {
   checkEmail(value) async {
     String query =
         "SELECT * FROM `admin_user_request` WHERE email = '${email.text}' AND `approved`=true";
-    // print("query" + query);
+    // //print("query" + query);
     var json = await Database.select(query);
     var emails = jsonDecode(json)['table_data'] as List;
+    //print("Vai numero ${emails.length}");
     if (emails.length == 0)
       requestApproved = false;
     else {
@@ -41,33 +42,35 @@ class _RegisterPageState extends State<RegisterPage> {
       fullName = adm.name;
     }
     query = "SELECT * FROM `AdminUser` WHERE email = '${email.text}'";
-    print("query" + query);
+    //print("query" + query);
     json = await Database.select(query);
     emails = jsonDecode(json)['table_data'] as List;
     if (emails.length == 0)
       emailUnavailable = false;
     else
       emailUnavailable = true;
-    print("Email naõ aprovado: $requestApproved");
-    print("Email existente: $emailUnavailable");
+    // //print("Email naõ aprovado: $requestApproved");
+    // //print("Email existente: $emailUnavailable");
 
     _formKey.currentState!.validate();
   }
 
   validateEmail(value) {
-    if (value.isEmpty) {
+    //print("Email naõ aprovado: $requestApproved");
+    ////print("Email existente: $emailUnavailable");
+    if (value == "") {
       return AppLocalizations.of(context).translate('Required field');
     }
     if (!requestApproved)
       return AppLocalizations.of(context).translate('emailNotApproved');
-    if (emailUnavailable)
+    else if (emailUnavailable)
       return AppLocalizations.of(context).translate('emailExist');
   }
 
   checkUsername(value) async {
     String query =
         "SELECT * FROM `AdminUser` WHERE username = '${username.text}' ";
-    print("query" + query);
+    //print("query" + query);
     var json = await Database.select(query);
     var usernames = jsonDecode(json)['table_data'] as List;
     if (usernames.length == 0)
@@ -78,7 +81,7 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   validateUsername(value) {
-    if (value.isEmpty) {
+    if (value == "") {
       return AppLocalizations.of(context).translate('Required field');
     }
     if (!nameAvailable)
@@ -87,7 +90,7 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   validatePassword(value) {
-    if (value.isEmpty) {
+    if (value == "") {
       return AppLocalizations.of(context).translate('Required field');
     }
     if (confirmPassword.text != password.text)
@@ -95,13 +98,13 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   Future<void> _handleSubmit(BuildContext context) async {
-    print("FUTUREEE");
+    //print("FUTUREEE");
     try {
       Connection.showLoadingDialog(context, _keyLoader); //invoking login
       // bool con = await Connection.checkConnection(context);
       await register(context);
     } catch (error) {
-      print(error);
+      //print(error);
     }
   }
 
@@ -123,27 +126,27 @@ class _RegisterPageState extends State<RegisterPage> {
     // }
   }
 
-  late FocusNode focusNode;
-  late FocusNode focusNodeUsername;
+  // late FocusNode focusNode;
+  // late FocusNode focusNodeUsername;
   @override
   void initState() {
     super.initState();
-    focusNode = new FocusNode();
-    focusNode.addListener(() {
-      if (!focusNode.hasFocus) {
-        setState(() {
-          checkEmail(email.text); //Check your conditions on text variable
-        });
-      }
-    });
-    focusNodeUsername = new FocusNode();
-    focusNodeUsername.addListener(() {
-      if (!focusNodeUsername.hasFocus) {
-        setState(() {
-          checkUsername(username.text); //Check your conditions on text variable
-        });
-      }
-    });
+    // focusNode = new FocusNode();
+    // focusNode.addListener(() {
+    //   if (!focusNode.hasFocus) {
+    //     setState(() {
+    //       checkEmail(email.text); //Check your conditions on text variable
+    //     });
+    //   }
+    // });
+    // focusNodeUsername = new FocusNode();
+    // focusNodeUsername.addListener(() {
+    //   if (!focusNodeUsername.hasFocus) {
+    //     setState(() {
+    //       checkUsername(username.text); //Check your conditions on text variable
+    //     });
+    //   }
+    // });
   }
 
   @override
@@ -191,7 +194,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     Expanded(
                         flex: 1,
                         child: TextFormField(
-                          focusNode: focusNodeUsername,
+                          // focusNode: focusNodeUsername,
                           controller: username,
                           maxLength: 20,
                           keyboardType: TextInputType.emailAddress,
@@ -215,7 +218,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     Expanded(
                         flex: 1,
                         child: TextFormField(
-                          focusNode: focusNode,
+                          // focusNode: focusNode,
                           controller: email,
                           maxLength: 50,
                           keyboardType: TextInputType.emailAddress,
@@ -268,7 +271,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               ),
                             )),
                         validator: (value) => validatePassword(value),
-                        onChanged: (value) => _formKey.currentState!.validate(),
+                        // onChanged: (value) => _formKey.currentState!.validate(),
                       ),
                     ),
                     Expanded(
@@ -279,7 +282,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         keyboardType: TextInputType.text,
                         obscureText: obscure,
                         validator: (value) => validatePassword(value),
-                        onChanged: (value) => _formKey.currentState!.validate(),
+                        // onChanged: (value) => _formKey.currentState!.validate(),
                         decoration: InputDecoration(
                             labelText: AppLocalizations.of(context)
                                 .translate('ConfirmPassword'),
@@ -322,7 +325,13 @@ class _RegisterPageState extends State<RegisterPage> {
                                       color: Colors.white,
                                       fontSize: height * 0.04)),
                               onPressed: () {
+                                // validateEmail(email.text);
+                                // validateUsername(username.text);
+                                checkEmail(email.text);
+                                checkUsername(username.text);
+                                // validatePassword(password.text);
                                 if (_formKey.currentState!.validate())
+                                  //print("passou");
                                   _handleSubmit(context);
                               })),
                     ),
