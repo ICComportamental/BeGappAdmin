@@ -324,11 +324,11 @@ class _RegisterPageState extends State<RegisterPage> {
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontSize: height * 0.04)),
-                              onPressed: () {
+                              onPressed: () async {
                                 // validateEmail(email.text);
                                 // validateUsername(username.text);
-                                checkEmail(email.text);
-                                checkUsername(username.text);
+                                await checkEmail(email.text);
+                                await checkUsername(username.text);
                                 // validatePassword(password.text);
                                 if (_formKey.currentState!.validate())
                                   //print("passou");

@@ -113,10 +113,10 @@ class Database {
     var digest = md5.convert(bytes);
 
     String query =
-        "INSERT INTO `AdminUser`(`name`, `username`, `password`, `email`, `userType`) VALUES (" +
-            "'${user.name}', '${user.username}', '$digest','${user.email}', 'basic')";
+        "INSERT INTO `AdminUser`(`name`, `username`, `password`, `email`, `userType`,`code`) VALUES (" +
+            "'${user.name}', '${user.username}', '$digest','${user.email}', 'basic','')";
     await insert(query);
-    //print(query);
+    print(query);
   }
 
   static getMaxLength(String table, String column) async {
