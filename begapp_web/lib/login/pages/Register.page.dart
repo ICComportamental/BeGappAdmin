@@ -114,15 +114,15 @@ class _RegisterPageState extends State<RegisterPage> {
         0, fullName, username.text, password.text, email.text, "userType", "");
 
     await Database.registerAdmin(admin);
-    // await Future.delayed(
-    //   Duration(
-    //     seconds: 2,
-    //   ),
-    // );
-    // Navigator.of(
-    //   _keyLoader.currentContext,
-    // ).pop();
-    // Navigator.pushReplacementNamed(context, "/login");
+    await Future.delayed(
+      Duration(
+        seconds: 2,
+      ),
+    );
+    Navigator.of(
+      _keyLoader.currentContext!,
+    ).pop();
+    Navigator.pushReplacementNamed(context, "/login");
     // }
   }
 
