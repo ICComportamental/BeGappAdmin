@@ -331,7 +331,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 await checkUsername(username.text);
                                 // validatePassword(password.text);
                                 if (_formKey.currentState!.validate())
-                                  //print("passou");
+                                  // print("passou");
                                   _handleSubmit(context);
                               })),
                     ),
