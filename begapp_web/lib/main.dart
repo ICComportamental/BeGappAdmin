@@ -66,6 +66,7 @@ class MyApp extends StatelessWidget {
   MyApp({required this.appLanguage, required this.loginSettings});
   @override
   Widget build(BuildContext context) {
+    print("A OK");
     return ChangeNotifierProvider<AppLanguage>(
         create: (_) => appLanguage,
         child: Consumer<AppLanguage>(builder: (context, model, child) {
