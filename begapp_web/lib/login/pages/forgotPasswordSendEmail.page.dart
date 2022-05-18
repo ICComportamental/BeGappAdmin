@@ -169,6 +169,7 @@ class ForgotPasswordSendEmailPage extends StatelessWidget {
                                       String query =
                                           "UPDATE AdminUser SET code='$code' WHERE email = '${txtEmail.text}'";
                                       await Database.update(query);
+                                      debugPrint("query:$query");
                                       await Database.sendgrid(
                                           txtEmail.text,
                                           AppLocalizations.of(context)
@@ -177,7 +178,7 @@ class ForgotPasswordSendEmailPage extends StatelessWidget {
                                                   .translate(
                                                       'resetPasswordMessage') +
                                               code);
-
+                                      debugPrint("query:NEXT");
                                       Navigator.of(context).push(
                                           MaterialPageRoute(
                                               builder: (context) =>
