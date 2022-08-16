@@ -287,7 +287,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         // onChanged: (value) => _formKey.currentState!.validate(),
                         decoration: InputDecoration(
                             labelText: AppLocalizations.of(context)
-                                .translate('ConfirmPassword'),
+                                .translate('confirmPassword'),
                             labelStyle: TextStyle(
                               color: Colors.black38,
                               fontWeight: FontWeight.w400,

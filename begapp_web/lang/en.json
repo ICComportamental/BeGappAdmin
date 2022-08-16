@@ -23,7 +23,7 @@
     "username":"Username",
     "email":"Email",
     "password":"Password",
-    "ConfirmPassword":"Confirm Password",
+    "confirmPassword":"Confirm Password",
     "register":"Register",
     "toRegister":"Register",
     "RegisterLabel":"Register",
