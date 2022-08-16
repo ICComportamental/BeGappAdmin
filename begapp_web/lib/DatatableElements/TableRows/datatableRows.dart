@@ -50,6 +50,16 @@ class DatatableRows {
         onTap: condition ? () => approve() : null);
   }
 
+  static getDenyCell({required Function deny}) {
+    return DataCell(
+        Center(
+            child: Icon(
+          Icons.cancel,
+          color: Colors.red,
+        )),
+        onTap: () => deny());
+  }
+
   static getEditCell({required bool condition, required Function edit}) {
     return DataCell(
         Center(

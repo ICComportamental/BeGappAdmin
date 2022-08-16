@@ -13,6 +13,7 @@
     "resetPassword":"Recuperar senha",
     "continue":"Continuar",
     "forgotPasswordSend":"Enviamos um código de confirmação para o email: ",
+    "forgotPasswordEmailSend":"Em alguns instantes, você receberá um código para cadastrar uma nova senha",
     "newPassword":"Nova senha",
     "resetPasswordMessage":"Utilize o código a seguir para alterar sua senha: ",
     "passwordReseted":"Senha alterada!",
@@ -40,8 +41,10 @@
     "intention":"Motivação",
     "send":"Enviar",
     "requestSend":"Solicitação enviada",
+    "requestalreadySend":"A sua solicitação foi enviada. Aguarde aprovação.",
     "cancel":"Cancelar",    
     "approve":"Aprovar",
+    "Deny":"Negar",
     "details":"Detalhes",
 
     "addExperiment":"Adicionar Experimento",

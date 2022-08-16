@@ -59,7 +59,8 @@ class _RequestsTableState extends State<RequestsTable> {
           AppLocalizations.of(context).translate('email'),
           AppLocalizations.of(context).translate('intention'),
           AppLocalizations.of(context).translate('details'),
-          AppLocalizations.of(context).translate('approve')
+          AppLocalizations.of(context).translate('approve'),
+          AppLocalizations.of(context).translate('Deny'),
         ],
       ),
       previous: () {

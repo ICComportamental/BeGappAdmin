@@ -214,10 +214,13 @@ class _RequestNewUserState extends State<RequestNewUser> {
                                             .languageCode);
                                 await Database.requestRegisterNewUser(
                                     adminUserRequest);
+                                txtEmail.text = "";
+                                txtNewUsername.text = "";
+                                txtIntention.text = "";
                                 Dialogs.showMessageDialog(
                                     context,
                                     AppLocalizations.of(context)
-                                        .translate('requestSend'));
+                                        .translate('requestalreadySend'));
                                 widget.onCancel();
                               }
                             })),

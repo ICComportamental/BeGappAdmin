@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:begapp_web/app_localizations.dart';
 import 'package:begapp_web/classes/connection.dart';
 import 'package:begapp_web/classes/database.dart';
+import 'package:begapp_web/classes/dialogs.dart';
 import 'package:begapp_web/login/classes/adminUser.dart';
 import 'package:begapp_web/login/classes/requestUserAdmin.dart';
 import 'package:flutter/material.dart';
@@ -331,9 +332,17 @@ class _RegisterPageState extends State<RegisterPage> {
                                 await checkEmail(email.text);
                                 await checkUsername(username.text);
                                 // validatePassword(password.text);
-                                if (_formKey.currentState!.validate())
-                                  // print("passou");
+                                if (_formKey.currentState!.validate()) {
+                                  print("passou");
                                   _handleSubmit(context);
+                                } else {
+                                  print("NAO passou");
+                                  if (!requestApproved)
+                                    await Dialogs.okDialog(
+                                        AppLocalizations.of(context)
+                                            .translate('requestalreadySend'),
+                                        context);
+                                }
                               })),
                     ),
                   ]))),

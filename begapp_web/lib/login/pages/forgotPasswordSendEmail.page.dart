@@ -4,6 +4,7 @@ import 'dart:convert';
 
 import 'package:begapp_web/app_localizations.dart';
 import 'package:begapp_web/classes/database.dart';
+import 'package:begapp_web/classes/dialogs.dart';
 import 'package:begapp_web/login/pages/forgotPasswordCode.page.dart';
 import 'package:crypto/crypto.dart';
 import 'package:flutter/material.dart';
@@ -170,20 +171,33 @@ class ForgotPasswordSendEmailPage extends StatelessWidget {
                                           "UPDATE AdminUser SET code='$code' WHERE email = '${txtEmail.text}'";
                                       await Database.update(query);
                                       debugPrint("query:$query");
-                                      await Database.sendgrid(
-                                          txtEmail.text,
-                                          AppLocalizations.of(context)
-                                              .translate('resetPassword'),
-                                          AppLocalizations.of(context)
-                                                  .translate(
-                                                      'resetPasswordMessage') +
-                                              code);
+                                      try {
+                                        await Database.sendgrid(
+                                            txtEmail.text,
+                                            AppLocalizations.of(context)
+                                                .translate('resetPassword'),
+                                            AppLocalizations.of(context)
+                                                    .translate(
+                                                        'resetPasswordMessage') +
+                                                code);
+                                      } catch (e) {
+                                        print(e);
+                                      }
                                       debugPrint("query:NEXT");
-                                      Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  ForgotPasswordCodePage(
-                                                      txtEmail.text)));
+                                      String email = txtEmail.text;
+                                      txtEmail.text = "";
+                                      Dialogs.okDialog(
+                                          AppLocalizations.of(context)
+                                              .translate(
+                                                  'forgotPasswordEmailSend'),
+                                          context, onPop: () {
+                                        Navigator.of(context).pop();
+                                        Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    ForgotPasswordCodePage(
+                                                        email)));
+                                      });
                                     }
                                   })),
                         ),

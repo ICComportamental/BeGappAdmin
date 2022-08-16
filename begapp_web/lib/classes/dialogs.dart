@@ -19,6 +19,31 @@ import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Dialogs {
+  static okDialog(String txt, context, {Function? onPop}) {
+    showDialog(
+        context: context,
+        builder: (_) => AlertDialog(
+              content: Text(
+                txt,
+                style: TextStyle(
+                    fontSize: MediaQuery.of(context).size.height / 30),
+              ),
+              actions: [
+                TextButton(
+                    onPressed: onPop != null
+                        ? () => onPop()
+                        : () {
+                            Navigator.of(context).pop();
+                          },
+                    child: Text(
+                      AppLocalizations.of(context).translate('ok'),
+                      style: TextStyle(
+                          fontSize: MediaQuery.of(context).size.height / 30),
+                    )),
+              ],
+            ));
+  }
+
   static showSimpleCustomDialog(BuildContext context) {
     Dialog simpleDialog = Dialog(
       shape: RoundedRectangleBorder(

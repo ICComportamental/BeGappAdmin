@@ -9,6 +9,7 @@ import 'package:begapp_web/prisoner_dilemma/classes/dilemmaVariables.dart';
 import 'package:begapp_web/prisoner_dilemma/classes/popup_message_pd.dart';
 import 'package:begapp_web/public_goods/classes/PG_variables.dart';
 import 'package:crypto/crypto.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http_parser/http_parser.dart';
@@ -103,7 +104,7 @@ class Database {
     String query =
         "SELECT * FROM AdminUser WHERE `username`='$username' AND `password`='$digest'";
     String body = await select(query);
-    //print(body);
+    debugPrint(body);
     return jsonDecode(body)['table_data'] as List;
   }
 
@@ -180,17 +181,19 @@ class Database {
     localStorage = await SharedPreferences.getInstance();
     String query;
     if (localStorage.get('userType') == 'master')
-      query = "SELECT * FROM config_publicgoods";
+      query =
+          "SELECT * FROM config_publicgoods WHERE `active`=true order by id desc";
     else
       query =
-          "SELECT * FROM config_publicgoods WHERE `adminId` = '${localStorage.get('username')}' OR `publicConfig`=1";
+          "SELECT * FROM config_publicgoods WHERE  `active`=true AND (`adminId` = '${localStorage.get('username')}' OR `publicConfig`=1) order by id desc";
     String body = await select(query);
 
     return jsonDecode(body)['table_data'] as List;
   }
 
   static getPublicGoodsExperiment(String key) async {
-    String query = "SELECT * FROM config_publicgoods WHERE `key`='$key' ";
+    String query =
+        "SELECT * FROM config_publicgoods WHERE `key`='$key' order by id desc";
     String body = await select(query);
 
     return jsonDecode(body)['table_data'] as List;
@@ -200,10 +203,11 @@ class Database {
     localStorage = await SharedPreferences.getInstance();
     String query;
     if (localStorage.get('userType') == 'master')
-      query = "SELECT * FROM config_dilemma";
+      query =
+          "SELECT * FROM config_dilemma WHERE `active`=true order by id desc ";
     else
       query =
-          "SELECT * FROM config_dilemma WHERE `adminId` = '${localStorage.get('username')}' OR `publicConfig`=1";
+          "SELECT * FROM config_dilemma WHERE `active`=true AND (`adminId` = '${localStorage.get('username')}' OR `publicConfig`=1) order by id desc";
     String body = await select(query);
     //print(body);
 
@@ -211,7 +215,8 @@ class Database {
   }
 
   static getDilemmaExperiment(String key) async {
-    String query = "SELECT * FROM config_dilemma WHERE `key`='$key'";
+    String query =
+        "SELECT * FROM config_dilemma WHERE `key`='$key' order by id desc";
     String body = await select(query);
 
     return jsonDecode(body)['table_data'] as List;
@@ -226,29 +231,31 @@ class Database {
 
   static searchDilemmaExperiments(
       String colunm, String value, bool active) async {
+    active = !active;
     localStorage = await SharedPreferences.getInstance();
     String query;
     if (localStorage.get('userType') == 'master')
       query =
-          "SELECT * FROM config_dilemma WHERE `$colunm` LIKE '%$value%' AND `active`=$active";
+          "SELECT * FROM config_dilemma WHERE `$colunm` LIKE '%$value%' AND `active`=$active order by id desc";
     else
       query =
-          "SELECT * FROM config_dilemma WHERE `$colunm` LIKE '%$value%' AND (`adminId` = '${localStorage.get('username')}' OR `publicConfig`=1) AND `active`=$active";
+          "SELECT * FROM config_dilemma WHERE `$colunm` LIKE '%$value%' AND (`adminId` = '${localStorage.get('username')}' OR `publicConfig`=1) AND `active`=$active order by id desc";
     String body = await select(query);
-    //print(query);
+    print(query);
     //print(body);
     return jsonDecode(body)['table_data'] as List;
   }
 
   static searchPGExperiments(String colunm, String value, bool active) async {
     localStorage = await SharedPreferences.getInstance();
+    active = !active;
     String query;
     if (localStorage.get('userType') == 'master')
       query =
-          "SELECT * FROM config_publicgoods WHERE `$colunm` LIKE '%$value%' AND `active`=$active";
+          "SELECT * FROM config_publicgoods WHERE `$colunm` LIKE '%$value%' AND `active`=$active order by id desc";
     else
       query =
-          "SELECT * FROM config_publicgoods WHERE `$colunm` LIKE '%$value%' AND (`adminId` = '${localStorage.get('username')}' OR `publicConfig`=1) AND `active`=$active";
+          "SELECT * FROM config_publicgoods WHERE `$colunm` LIKE '%$value%' AND (`adminId` = '${localStorage.get('username')}' OR `publicConfig`=1) AND `active`=$active order by id desc";
     String body = await select(query);
 
     return jsonDecode(body)['table_data'] as List;

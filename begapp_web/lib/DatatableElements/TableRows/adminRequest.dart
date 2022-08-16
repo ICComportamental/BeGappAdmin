@@ -36,6 +36,12 @@ List<DataCell> getAdminRequest(
         Database.sendgrid(request.email, btnText, emailBody);
         Navigator.pushReplacementNamed(contextDialog, RequestsPage.routeName);
       }));
+  row.add(DatatableRows.getDenyCell(deny: () async {
+    await Database.update(
+        "DELETE from `admin_user_request` WHERE id=" + request.id.toString());
+
+    Navigator.pushReplacementNamed(contextDialog, RequestsPage.routeName);
+  }));
   return row;
 }
 

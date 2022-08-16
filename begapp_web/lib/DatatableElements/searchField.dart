@@ -39,12 +39,12 @@ class _SearchFieldState extends State<SearchField> {
                 flex: 2,
                 child: TextFormField(
                   onFieldSubmitted: (value) {
-                    if (showArchive)
-                      widget.search.search(widget.search.dbColumns[index],
-                          txtSearch.text, showArchive);
-                    else
-                      widget.search.search(
-                          widget.search.dbColumns[index], txtSearch.text);
+                    // if (showArchive)
+                    widget.search.search(widget.search.dbColumns[index],
+                        txtSearch.text, showArchive);
+                    // else
+                    //   widget.search.search(
+                    //       widget.search.dbColumns[index], txtSearch.text);
                   },
                   controller: txtSearch,
                   decoration: InputDecoration(
@@ -57,15 +57,13 @@ class _SearchFieldState extends State<SearchField> {
                       suffixIcon: TextButton(
                           child: Icon(Icons.search),
                           onPressed: () {
-                            if (showArchive)
-                              widget.search.search(
-                                  widget.search.dbColumns[index],
-                                  txtSearch.text,
-                                  showArchive);
-                            else
-                              widget.search.search(
-                                  widget.search.dbColumns[index],
-                                  txtSearch.text);
+                            // if (showArchive)
+                            widget.search.search(widget.search.dbColumns[index],
+                                txtSearch.text, showArchive);
+                            // else
+                            //   widget.search.search(
+                            //       widget.search.dbColumns[index],
+                            //       txtSearch.text);
                           }),
                       border: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.blueGrey),
@@ -107,7 +105,8 @@ class _SearchFieldState extends State<SearchField> {
                 top: MediaQuery.of(context).size.height * 0.01,
               ),
               child: Flex(
-                direction: Axis.vertical,
+                direction: Axis.horizontal,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Row(
                     children: [
@@ -115,7 +114,7 @@ class _SearchFieldState extends State<SearchField> {
                         value: showArchive,
                         onChanged: (value) {
                           setState(() {
-                            showArchive = value!;
+                            showArchive = !showArchive;
                             widget.search.search(widget.search.dbColumns[index],
                                 txtSearch.text, showArchive);
                           });

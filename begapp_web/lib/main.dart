@@ -66,11 +66,11 @@ class MyApp extends StatelessWidget {
   MyApp({required this.appLanguage, required this.loginSettings});
   @override
   Widget build(BuildContext context) {
-    print("V1");
+    print("V2 - uniararas");
     return ChangeNotifierProvider<AppLanguage>(
         create: (_) => appLanguage,
         child: Consumer<AppLanguage>(builder: (context, model, child) {
-          // appLanguage.changeLanguage(Locale("en"));
+          appLanguage.changeLanguage(Locale("pt"));
           return MaterialApp(
             initialRoute: "/login",
             routes: {

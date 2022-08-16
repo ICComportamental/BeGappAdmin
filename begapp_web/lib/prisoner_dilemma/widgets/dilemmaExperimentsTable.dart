@@ -72,7 +72,7 @@ class _DilemmaExperimentsTableState extends State<DilemmaExperimentsTable> {
         "adminId"
       ], (String column, String txtSearch, bool active) async {
         List list =
-            await Database.searchDilemmaExperiments(column, txtSearch, true);
+            await Database.searchDilemmaExperiments(column, txtSearch, active);
         // print(list);
         setState(() {
           indexPage = 1;
