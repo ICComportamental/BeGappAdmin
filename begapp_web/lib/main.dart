@@ -66,7 +66,7 @@ class MyApp extends StatelessWidget {
   MyApp({required this.appLanguage, required this.loginSettings});
   @override
   Widget build(BuildContext context) {
-    print("V2 - uniararas");
+    print("V3 - C minusculo");
     return ChangeNotifierProvider<AppLanguage>(
         create: (_) => appLanguage,
         child: Consumer<AppLanguage>(builder: (context, model, child) {
